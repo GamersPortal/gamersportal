@@ -3304,7 +3304,6 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   position: absolute;
   right: 16px;
   top: 42%;
-  -webkit-transform: scale(1.001);
   transform: scale(1.001);
 }
 .select2-arrow b {
@@ -4835,7 +4834,6 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   display: inline-block;
   width: 132px;
   border-radius: 30px;
-  -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
 .bootstrap-switch > div > span {
@@ -5116,7 +5114,6 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   font-size: 0;
   vertical-align: middle;
   overflow: hidden;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-top-radius: 0.375em;
   width: 100% !important;
@@ -5480,46 +5477,22 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   width: 16px;
   border-radius: 10px;
   margin: -8px 0 0 -8px;
-  -webkit-animation: sharp 2s ease infinite;
   animation: sharp 2s ease infinite;
-}
-@-webkit-keyframes sharp {
-  0% {
-    background-color: #e74c3c;
-    border-radius: 10px;
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  50% {
-    background-color: #ecf0f1;
-    border-radius: 0;
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
-  }
-  100% {
-    background-color: #e74c3c;
-    border-radius: 10px;
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
 }
 @keyframes sharp {
   0% {
     background-color: #e74c3c;
     border-radius: 10px;
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   50% {
     background-color: #ecf0f1;
     border-radius: 0;
-    -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
   }
   100% {
     background-color: #e74c3c;
     border-radius: 10px;
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -6378,7 +6351,6 @@ footer .credits .col-md-12 {
   border-top-color: #34495e;
   border-left-color: #2980b9;
   border-radius: 10px;
-  -webkit-animation: loading-bar-spinner 400ms linear infinite;
   animation: loading-bar-spinner 400ms linear infinite;
 }
 #loading-bar.ng-enter,
@@ -6875,7 +6847,6 @@ section.wrapper-page {
   text-transform: uppercase;
   text-align: center;
   line-height: 20px;
-  -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
   width: 100px;
   display: block;
@@ -6924,7 +6895,6 @@ section.wrapper-page {
   text-transform: uppercase;
   text-align: center;
   line-height: 20px;
-  -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
   width: 100px;
   display: block;

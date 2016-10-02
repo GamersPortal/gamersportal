@@ -184,6 +184,12 @@ Route::group(['prefix' => 'wpanel', 'roles' => 'admin', 'middleware' => ['auth',
 
     Route::get('categories', ['uses' => 'CategoriesController@showList', 'as' => 'categories']);
 
+
+
+
+
+
+
     Route::resource('productsdetails', 'ProductDetailsController');
 
     Route::get('features', ['uses' => 'ProductDetailsController@index', 'as' => 'features']);
