@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->integer('payment_method_id')->unsigned();
 
             $table->string('stripeToken')->nullable();
-            
+
             $table->timestamps();
 
             /**

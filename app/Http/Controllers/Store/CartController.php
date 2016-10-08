@@ -15,66 +15,72 @@ use App\Http\Requests\Shopping\AddToCartRequest;
 /**
  * Models
  */
-use App\Models\Product;
+use App\Models\Game;
 use Cart;
 
 class CartController extends Controller
 {
-  /**
-   * Adds product to cart
-   *
-   * @param AddToCartRequest $request
-   */
-  public function add(AddToCartRequest $request)
-  {
-    $product = Product::where('active', 1)->findOrFail((int)$request->product_id);
+    /**
+     * Adds game to cart
+     *
+     * @param AddToCartRequest $request
+     */
+    public function add(AddToCartRequest $request)
+    {
 
-    if ($product) {
-      Cart::associate('App\Models\Product')->add($product->id, $product->name, 1, $product->price);
+        $game = Game::where('active', 1)->findOrFail((int)$request->game_id);
+
+        if ($game) {
+            $game->price = null;
+            Cart::associate('App\Models\Game')->add($game->id, $game->name, null, null);
+        }
+
+
+
+
+
+        return back();
     }
 
-    return back();
-  }
+    public function show()
+    {
 
-  public function show()
-  {
+        return view('store.shopping.cart');
+    }
 
-    return view('store.shopping.cart');
-  }
+    /**
+     * Removes game from cart
+     *
+     * @param  Request $request
+     * @return Response
+     */
+    public function remove(Request $request)
+    {
+        Cart::remove($request['rowId']);
 
-  /**
-   * Removes product from cart
-   *
-   * @param  Request $request
-   * @return Response
-   */
-  public function remove(Request $request)
-  {
-    Cart::remove($request['rowId']);
+        return back();
+    }
 
-    return back();
-  }
+    /**
+     * Clears current cart
+     *
+     * @return Response
+     */
+    public function clear()
+    {
+        Cart::destroy();
 
-  /**
-   * Clears current cart
-   *
-   * @return Response
-   */
-  public function clear()
-  {
-    Cart::destroy();
+        return back();
+    }
 
-    return back();
-  }
+    /**
+     * Shows view for confirming cart content and proceeding to order
+     *
+     * @return Response
+     */
+    public function checkout()
+    {
 
-  /**
-   * Shows view for confirming cart content and proceeding to order
-   *
-   * @return Response
-   */
-  public function checkout()
-  {
-
-    return view('store.shopping.checkout');
-  }
+        return view('store.shopping.checkout');
+    }
 }

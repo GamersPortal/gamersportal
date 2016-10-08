@@ -1,11 +1,10 @@
-<?php
-
-namespace App\Http\Requests\Shopping;
+<?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class AddToCartRequest extends Request
+class GameRequest extends Request
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,7 +23,11 @@ class AddToCartRequest extends Request
     public function rules()
     {
         return [
-            'game_id' => 'required|exists:games,id'
+            'name' => 'required|between:3,255',
+            'category_id' => '',
+            'description' => '',
+            'image' => 'image|max:2048',
         ];
     }
+
 }

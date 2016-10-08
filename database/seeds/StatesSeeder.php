@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class StatesSeeder extends Seeder {
+class StatesSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
@@ -16,7 +17,7 @@ class StatesSeeder extends Seeder {
 
         //Get all of the states
         $states = States::getList();
-        foreach ($states as $stateId => $state){
+        foreach ($states as $stateId => $state) {
             DB::table(\Config::get('states.table_name'))->insert(array(
                 'id' => $stateId,
                 'iso_3166_2' => $state['iso_3166_2'],

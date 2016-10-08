@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 use App\Models\Category;
-use App\Models\Product;
+use App\Models\Game;
 use App\Models\Order;
 
 use Auth;
@@ -21,8 +21,8 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->composeSidebarNavigation();
-        $this->composeNewProductsPanel();
-        $this->composeDiscountedProductsPanel();
+        $this->composeNewGamesPanel();
+        //$this->composeDiscountedGamesPanel();
         $this->composeCartPanel();
         $this->composeCartInstance();
         $this->composeAdminSidebar();
@@ -42,33 +42,34 @@ class ViewComposerServiceProvider extends ServiceProvider
      * Send categories variable to side.navigation partial
      * @return void
      */
-    private function composeSidebarNavigation(){
-        view()->composer('store.side-navigation', function($view){
+    private function composeSidebarNavigation()
+    {
+        view()->composer('store.side-navigation', function ($view) {
             $view->with('categories', Category::all()->toHierarchy());
         });
     }
 
     /**
-     * Select 8 products with New label
+     * Select 8 games with New label
      * @return Void
      */
-    private function composeNewProductsPanel()
+    private function composeNewGamesPanel()
     {
-        view()->composer('store.products.new-products', function($view){
-            $view->with('products', Product::where('active', 1)
-                                            ->where('new', 1)
-                                            ->orderBy('created_at', 'DESC')
-                                            ->take(8)->get());
+        view()->composer('store.games.new-games', function ($view) {
+            $view->with('games', Game::where('active', 1)
+                ->where('new', 1)
+                ->orderBy('created_at', 'DESC')
+                ->take(8)->get());
         });
     }
 
-    private function composeDiscountedProductsPanel()
+    private function composeDiscountedGamesPanel()
     {
-        view()->composer('store.products.discounted-products', function($view){
-            $view->with('products', Product::where('active', 1)
-                                            ->where('discounted_price', '!=', "NULL")
-                                            ->orderBy('created_at', 'DESC')
-                                            ->take(8)->get());
+        view()->composer('store.games.discounted-games', function ($view) {
+            $view->with('games', Game::where('active', 1)
+                ->where('discounted_price', '!=', "NULL")
+                ->orderBy('created_at', 'DESC')
+                ->take(8)->get());
         });
     }
 
@@ -78,7 +79,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     private function composeCartPanel()
     {
-        view()->composer('store.shopping.cart-panel', function($view){
+        view()->composer('store.shopping.cart-panel', function ($view) {
             $view->with([
                 'user' => Auth::user(),
                 'cartCount' => Cart::count(),
@@ -94,11 +95,11 @@ class ViewComposerServiceProvider extends ServiceProvider
     private function composeCartInstance()
     {
         view()->composer([
-                'store.shopping.cart',
-                'store.shopping.checkout',
-                'store.shopping.confirm',
-                'store.shopping.order-shipping'
-            ], function($view){
+            'store.shopping.cart',
+            'store.shopping.checkout',
+            'store.shopping.confirm',
+            'store.shopping.order-shipping'
+        ], function ($view) {
             $view->with([
                 'cart' => Cart::instance('main'),
             ]);
@@ -107,7 +108,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 
     private function composeAdminSidebar()
     {
-        view()->composer('admin.sidebar', function($view){
+        view()->composer('admin.sidebar', function ($view) {
             $view->with([
                 'pendingOrderCount' => Order::where('status_code_id', 1)->count(),
                 'proccessingOrderCount' => Order::where('status_code_id', 2)->count(),
